@@ -18,7 +18,7 @@ function setup() {
   } else {
     len = 100;
     ancho = 10;
-    canvas = createCanvas(displayWidth, displayHeight);
+    canvas = createCanvas(displayWidth, 1000);
   }
   canvas.parent(document.getElementById('canvas-container'));
   
