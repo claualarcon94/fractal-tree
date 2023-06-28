@@ -14,7 +14,7 @@ function setup() {
   background(55);
   canvas = createCanvas(windowWidth, windowHeight);
     if(windowHeight<1920){
-      len = len*windowWidth/700;
+      len = len*windowWidth/1000;
       ancho = ancho*windowHeight/1000;
     }
     
