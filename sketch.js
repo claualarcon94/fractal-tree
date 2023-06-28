@@ -28,7 +28,7 @@ function setup() {
   angle1 = Math.PI / 4;
   angle2 = radians(15);
 
-  root = new Tree(createVector(width / 4, height), createVector(width / 4, height - len));
+  root = new Tree(createVector(width / 4 + 50, height), createVector(width / 4 + 50, height - len));
 
   ramas.push(root);
 

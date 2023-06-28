@@ -32,7 +32,7 @@ constructor(tpos) {
 
    display() {
     noStroke();
-    fill(255, 100);
+    fill(255,50,0, 150);
     ellipse(this.pos.x, this.pos.y, 2, 2);
   }
 }
