@@ -13,7 +13,7 @@ var gravity;
 function setup() {
   background(55);
   if (windowWidth < 1000) {
-    canvas = createCanvas(displayWidth, displayHeight);
+    canvas = createCanvas(windowWidth, windowHeight-300);
     len = 100;
     ancho = 10;
   } else {
