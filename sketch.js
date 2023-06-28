@@ -80,7 +80,7 @@ function draw() {
   }
 }
 
-function mousePressed() {
+function touchStarted(){
   if (count < 10) {
     count++;
     ancho *= 0.67;
@@ -100,16 +100,44 @@ function mousePressed() {
       }
       current.finished = true;
     }
-/*
-    if (count == 10) {
-      for (let i = 0; i < ramas.length; i++) {
-        if (!ramas[i].finished) {
-          let hojapos = ramas[i].end.copy();
-          let hoja = new Leaves(hojapos);
-          hojas.push(hoja);
-        }
-      }
-    }
-    */
+
   }
+}
+
+let touchProcessed = false;
+let touchDelay = 500; // Adjust the delay time as needed
+let lastTouchTime = 0;
+
+function touchStarted() {
+  let currentTime = millis();
+  if (!touchProcessed && (currentTime - lastTouchTime) > touchDelay) {
+    touchProcessed = true;
+    lastTouchTime = currentTime;
+
+    if (count < 10) {
+      count++;
+      ancho *= 0.67;
+      for (let i = ramas.length - 1; i >= 0; i--) {
+        let current = ramas[i];
+        if (!current.finished) {
+          let p = random(0, 101);
+          if (p < 100 && current.generation > 3 || current.generation <= 3) {
+            ramas.push(current.branchA());
+          }
+  
+          p = random(0, 101);
+          if (p < 100 && current.generation > 3 || current.generation <= 3) {
+  
+            ramas.push(current.branchB());
+          }
+        }
+        current.finished = true;
+      }
+  
+    }
+  }
+}
+
+function touchEnded() {
+  touchProcessed = false;
 }
