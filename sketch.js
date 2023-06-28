@@ -12,10 +12,12 @@ var gravity;
 
 function setup() {
   background(55);
-  
-    canvas = createCanvas(windowWidth, windowHeight);
-   // len = 100;
-    //ancho = 10;
+  canvas = createCanvas(windowWidth, windowHeight);
+    if(windowHeight<1920){
+      len = len*windowWidth/700;
+      ancho = ancho*windowHeight/1000;
+    }
+    
 
   canvas.parent(document.getElementById('canvas-container'));
   
@@ -33,6 +35,7 @@ function setup() {
 
 function draw() {
   background(55);
+  
   t += 0.005;
 
   for (let rama of ramas) rama.display();
