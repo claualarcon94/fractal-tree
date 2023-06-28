@@ -1,75 +1,69 @@
-this.Tree = ()=> {
-  this.begin;
-  this.end;
-  this.acc;
-  this.vel=new PVector(0, 0);;
-  this.wid;
-  this.finished=false;
-  this.color;
-  this.dir=new PVector(200, 0);
-  this.generation;
+class Tree { //<>//
+  
+   //this.color = color(121, 64, 28);
 
 
-  Tree(tbegin, tend) {
-    vel = new PVector(0, 0);
-    acc = new PVector(0, 0);
-    end=tend;
-    begin=tbegin;
-    this.color = color(121,64,28);
-    wid=ancho;
-    generation=count;
+  constructor(begin,end) {
+    this.vel = createVector(0, 0);
+    this.acc = createVector(0, 0);
+    this.end=end;
+    this.begin=begin;
+    this.color = color(121, 64, 28);
+    this.wid=ancho;
+    this.generation=count;
+    this.finished=false;
   }
-  void update() {
-    vel.add(acc);
-    begin.add(vel);
-    end.add(vel);
-    acc.mult(0);
+   update() {
+    this.vel.add(this.acc);
+    this.begin.add(this.vel);
+    this.end.add(this.vel);
+    this.acc.mult(0);
   }
 
-  void applyForce(PVector Force) {
-    acc.add(Force);
+   applyForce( force) {
+    this.acc.add(force);
   }
 
 
-  Tree branchA() {
+   branchA() {
 
-    dir = PVector.sub(end, begin);
+    let dir = p5.Vector.sub(this.end, this.begin);
     dir.mult(.67);
     dir.rotate(-angle2);
-    PVector newEnd = PVector.add(end, dir);
-    Tree right = new Tree( end, newEnd);
+    var newEnd = p5.Vector.add(this.end, dir);
+    var right = new Tree( this.end, newEnd);
 
     return right;
+    
   }
 
-  Tree branchB() {
-    dir = PVector.sub(end, begin);
+   branchB() {
+    let dir = p5.Vector.sub(this.end, this.begin);
     dir.mult(.67);
     dir.rotate(angle1);
-
-    PVector newEnd = PVector.add(end, dir);
-    Tree left = new Tree( end, newEnd);
+    var newEnd = p5.Vector.add(this.end, dir);
+    var left =new Tree( this.end, newEnd);
     return left;
   }
 
 
 
-  void display() {
-    if (generation==10) {
+   display() {
+    if (this.generation === 10) {
       noStroke();
-      fill(#F2E140, 100);
-      ellipse(end.x, end.y, 8, 8);
+      fill(242, 225, 64);
+      ellipse(this.end.x, this.end.y, 8, 8);
     }
 
-    if (generation<9) {
+    if (this.generation<9) {
       stroke(0);
-      strokeWeight(wid);
-      line(begin.x, begin.y, end.x, end.y);
+      strokeWeight(this.wid);
+      line(this.begin.x, this.begin.y, this.end.x, this.end.y);
     } else {
-      c=color(#00537E);
-      stroke(c);
-      strokeWeight(wid);
-      line(begin.x, begin.y, end.x, end.y);
+      stroke(0, 83, 126);
+      strokeWeight(this.wid);
+      line(this.begin.x,this.begin.y, this.end.x, this.end.y);
     }
   }
+
 }
