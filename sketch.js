@@ -12,13 +12,11 @@ var gravity;
 
 function setup() {
   background(55);
-  if (windowWidth < 1920) {
-    canvas = createCanvas(windowWidth, windowHeight-300);
-    len = 100;
-    ancho = 10;
-  } else {
-   canvas = createCanvas(800, 600);
-  }
+  
+    canvas = createCanvas(windowWidth, windowHeight);
+   // len = 100;
+    //ancho = 10;
+
   canvas.parent(document.getElementById('canvas-container'));
   
   angle1 = Math.PI / 4;
