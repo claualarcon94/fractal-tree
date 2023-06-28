@@ -13,8 +13,4 @@ p{
 }
 
 @media (max-width: 600px) {
-  body {
-    background-color: lightgreen;
-    font-size: 14px;
-}
 }
