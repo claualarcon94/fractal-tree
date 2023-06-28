@@ -1,49 +1,48 @@
-var ramas = [];  //<>//
+var ramas = []; 
 var hojas = [];
-var generation;
 var len = 200;
 var count = 1;
-var angle1 = Math.PI / 4;
+var angle1;
 var angle2;
 var ancho = 20;
-
-
 var t = 0;
 var root;
 
+var gravity;
+
 function setup() {
   background(55);
-  canvas = createCanvas(700, 600);
+  if (windowWidth > 1000) {
+    canvas = createCanvas(1000, 800);
+    console.log(windowWidth);
+  } else {
+    canvas = createCanvas(600, 400);
+  }
   canvas.parent(document.getElementById('canvas-container'));
+  
+  angle1 = Math.PI / 4;
   angle2 = radians(15);
+  
   root = new Tree(createVector(width / 2, height), createVector(width / 2, height - len));
-
+  
   ramas.push(root);
-  hojas.push(new Leaves(createVector(-100, 100)));
+  
+  gravity = createVector(0, 0.01);
+
+  randomSeed(42)
 }
 
 function draw() {
   background(55);
   t += 0.005;
-  for (let rama of ramas) {
-    if (rama.generation >= 10) {
-      //let noise = noise(t);
-      //noise = map(noise, 0, 1, -0.5, 0.5);
-      //let wind = createVector (noise, 0);
-      // rama.applyForce(wind);
-      rama.update();
-    }
 
-    rama.display();
-  }
-
-  var gravity = createVector(0, 0.01);
+  for (let rama of ramas) rama.display();
 
 
   for (let hoja of hojas) {
-    let n = noise(t);
-    n = map(n, 0, 1, -0.05, 0.05);
-    let wind = createVector(n, 0);
+    let turbulence = noise(t);
+    turbulence = map(turbulence, 0, 1, -0.05, 0.05);
+    let wind = createVector(turbulence, 0);
 
     hoja.applyForce(gravity);
     hoja.applyWind(wind);
@@ -67,9 +66,6 @@ function draw() {
     }
   }
 }
-
-
-
 
 function mousePressed() {
   if (count < 10) {
@@ -102,42 +98,4 @@ function mousePressed() {
       }
     }
   }
-}
-
-function keyPressed() {
-  if (key == '+' && count < 10) {
-    count++;
-    ancho *= 0.67;
-    for (let i = ramas.length - 1; i >= 0; i--) {
-      let current = ramas[i];
-      if (!current.finished) {
-        let p = random(0, 101);
-        if (p < 100 && current.generation > 3 || current.generation <= 3) {
-          ramas.push(current.branchA());
-        }
-
-        p = random(0, 101);
-        if (p < 100 && current.generation > 3 || current.generation <= 3) {
-
-          ramas.push(current.branchB());
-        }
-      }
-      current.finished = true;
-    }
-
-    if (count == 10) {
-      for (let i = 0; i < ramas.length; i++) {
-        if (!ramas[i].finished) {
-          let hojapos = ramas[i].end.copy();
-          let hoja = new Leaves(hojapos);
-          hojas.push(hoja);
-        }
-      }
-    }
-  }
-  /*
-  else if (key=='f') {
-    saveFrame("screenshots/arbolfractal####.png");
-  }
-  */
 }
