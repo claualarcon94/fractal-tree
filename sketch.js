@@ -1,10 +1,10 @@
 var ramas = []; 
 var hojas = [];
-var len = 200;
+var len;
 var count = 1;
 var angle1;
 var angle2;
-var ancho = 20;
+var ancho;
 var t = 0;
 var root;
 
@@ -12,13 +12,23 @@ var gravity;
 
 function setup() {
   background(55);
-  canvas = createCanvas(windowWidth, windowHeight);
-    if(windowHeight<1920 || windowsWidth<1080){
+  
+
+
+    let userAgent = navigator.userAgent.toLowerCase();
+    console.log(userAgent);
+
+    if (userAgent.match(/mobile|iphone|ipod|android|blackberry|opera mini|iemobile|wpdesktop/i)) {
+      canvas = createCanvas(windowWidth, windowHeight);
       len = len*windowWidth/750;
       ancho = ancho*windowHeight/750;
+    }else{
+      canvas = createCanvas(750, 600);
+      len = 200;
+      ancho = 20;
     }
     
-
+  
   canvas.parent(document.getElementById('canvas-container'));
   
   angle1 = Math.PI / 4;
