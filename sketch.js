@@ -63,9 +63,12 @@ function draw() {
 
 
   for (let i = 0; i < ramas.length; i++) {
-    if (ramas[i].generation == 10 && frameCount % 60 == 0) {
+    if (ramas[i].generation == 10 ) {
+      let chance = random(1000);
+      if(chance<20){
       let hoja = new Leaves(ramas[i].end);
       hojas.push(hoja);
+      }
     }
   }
 
@@ -97,7 +100,7 @@ function mousePressed() {
       }
       current.finished = true;
     }
-
+/*
     if (count == 10) {
       for (let i = 0; i < ramas.length; i++) {
         if (!ramas[i].finished) {
@@ -107,5 +110,6 @@ function mousePressed() {
         }
       }
     }
+    */
   }
 }
