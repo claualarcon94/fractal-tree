@@ -1,4 +1,4 @@
-var ramas = []; 
+var ramas = [];
 var hojas = [];
 var len;
 var count = 1;
@@ -12,40 +12,38 @@ var gravity;
 
 function setup() {
   background(55);
+
   
 
-
-    let userAgent = navigator.userAgent.toLowerCase();
-    console.log(userAgent);
-
-    if (userAgent.match(/mobile|iphone|ipod|android|blackberry|opera mini|iemobile|wpdesktop/i)) {
-      canvas = createCanvas(windowWidth, windowHeight);
-      len = len*windowWidth/750;
-      ancho = ancho*windowHeight/750;
-    }else{
-      canvas = createCanvas(750, 600);
-      len = 200;
-      ancho = 20;
-    }
-    
-  
+  canvas = createCanvas(windowWidth, windowHeight);
   canvas.parent(document.getElementById('canvas-container'));
+
   
+
+  len = windowHeight*0.185;
+  ancho = windowHeight*0.03;
+
+ 
+
   angle1 = Math.PI / 4;
   angle2 = radians(15);
-  
+
   root = new Tree(createVector(width / 2, height), createVector(width / 2, height - len));
-  
+
   ramas.push(root);
-  
+
   gravity = createVector(0, 0.01);
 
   randomSeed(42)
 }
 
+function windowResized() {
+  resizeCanvas(windowWidth, windowHeight);
+}
+
 function draw() {
   background(55);
-  
+
   t += 0.005;
 
   for (let rama of ramas) rama.display();
