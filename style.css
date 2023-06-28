@@ -5,12 +5,6 @@ html, body {
   padding: 0;
 }
 
-
-
-
 p{
   font-size: 30px;
-}
-
-@media (max-width: 600px) {
 }
