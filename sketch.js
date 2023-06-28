@@ -12,13 +12,12 @@ var gravity;
 
 function setup() {
   background(55);
-  if (windowWidth > 1000) {
-    canvas = createCanvas(1000, 800);
-    console.log(windowWidth);
-  } else {
+  if (windowWidth < 1000) {
+    canvas = createCanvas(displayWidth, displayHeight);
     len = 100;
     ancho = 10;
-    canvas = createCanvas(displayWidth, 800);
+  } else {
+   canvas = createCanvas(800, 600);
   }
   canvas.parent(document.getElementById('canvas-container'));
   
